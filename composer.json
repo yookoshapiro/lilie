@@ -1,0 +1,21 @@
+{
+    "name": "yookoshapiro/lilie",
+    "description": "Page-Manager for Content Managment Systems",
+    "keywords": ["manager", "Lilie"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steven Markgraf",
+            "email": "yooko.shapiro@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lilie": "src/"
+        },
+        "files": [
+            "src/Lilie/start.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
