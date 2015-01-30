@@ -1,6 +1,6 @@
 <?php namespace Lilie;
 
-use Psy\Exception\ErrorException;
+use ErrorException;
 
 abstract class DataObject implements \ArrayAccess {
 
