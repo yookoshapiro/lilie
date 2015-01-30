@@ -1,6 +1,5 @@
 <?php namespace Lilie\Facade;
 
-use Lilie\Pool\Repository;
 use Illuminate\Support\Facades\Facade;
 
 class Pool extends Facade {
@@ -13,7 +12,7 @@ class Pool extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return Repository::class;
+        return \Lilie\Pool\Repository::class;
     }
 
 

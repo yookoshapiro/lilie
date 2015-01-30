@@ -1,6 +1,5 @@
 <?php namespace Lilie\Facade;
 
-use Lilie\Config\Repository;
 use Illuminate\Support\Facades\Facade;
 
 class Config extends Facade {
@@ -12,7 +11,7 @@ class Config extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return Repository::class;
+        return \Lilie\Config\Repository::class;
     }
 
 }
