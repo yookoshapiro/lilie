@@ -1,7 +1,5 @@
 <?php
 
-use Cache as AppCache;
-
 class LoaderTest extends \PHPUnit_Framework_TestCase {
 
     public function getLoader()
@@ -12,9 +10,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase {
     public function testGetData()
     {
         $loader = $this->getLoader();
-        $data = $loader->getData();
+        $loader->loadConfig( __DIR__ . '/asset' );
 
-        $this->assertArrayHasKey('default', $data);
-        $this->assertEquals(4, count(head($data)));
+        $this->assertArrayHasKey('pool', $loader->getData());
     }
 }

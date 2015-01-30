@@ -15,15 +15,6 @@ class Loader {
 
 
     /**
-     * Constructor load the data from lilie's puddle
-     */
-    public function __construct()
-    {
-        $this->loadConfig( lilie_path(AppConfig::get('packages.lilie.puddle')) );
-    }
-
-
-    /**
      * Get back all loaded settings.
      *
      * @return  mixed
