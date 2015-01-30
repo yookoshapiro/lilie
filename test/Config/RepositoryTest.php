@@ -16,7 +16,7 @@ class RepositoryTest extends PHPUnit_Framework_TestCase {
                 'pool' => ['path' => 'to/hell']
             ]);
 
-        return new Lilie\Config\Repository( $loaderMock, $path );
+        return new Lilie\Config\Repository( $path, $loaderMock);
     }
 
     public function testThatConfigArrivedRepository()

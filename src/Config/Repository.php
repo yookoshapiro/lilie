@@ -7,10 +7,10 @@ class Repository extends ConfigRepository
     /**
      * Create a new configuration repository.
      *
-     * @param   \Lilie\Config\Loader    $loader
      * @param   string                  $path
+     * @param   \Lilie\Config\Loader    $loader
      */
-    public function __construct(Loader $loader, $path)
+    public function __construct($path, Loader $loader)
     {
         $loader->loadConfig($path);
 
