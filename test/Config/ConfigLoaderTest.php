@@ -1,10 +1,10 @@
 <?php
 
-class LoaderTest extends \PHPUnit_Framework_TestCase {
+class ConfigLoaderTest extends \PHPUnit_Framework_TestCase {
 
     public function getLoader()
     {
-        return new Lilie\Config\Loader;
+        return new \Lilie\Config\Loader;
     }
 
     public function testGetData()

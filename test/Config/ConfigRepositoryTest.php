@@ -1,6 +1,11 @@
 <?php
 
-class RepositoryTest extends PHPUnit_Framework_TestCase {
+class ConfigRepositoryTest extends PHPUnit_Framework_TestCase {
+
+    public function tearDown()
+    {
+        Mockery::close();
+    }
 
     public function getRepository()
     {
