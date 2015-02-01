@@ -1,9 +1,17 @@
 <?php namespace Lilie\Pool;
 
 use Lilie\Type;
-use Lilie\DataObject;
+use Illuminate\Contracts\Foundation\Application as App;
 
 class Pool {
+
+    /**
+     * Laravel's application
+     *
+     * @var	    \Illuminate\Contracts\Foundation\Application
+     **/
+    protected $app;
+
 
     /**
      * The data for this class.
@@ -24,13 +32,48 @@ class Pool {
     /**
      * Build the object.
      *
-     * @param   \Lilie\DataObject       $context
-     * @param   \Lilie\Type\Repository
+     * @param   array   $context
+     * @param   \Lilie\Type\Repository  $repository
+     * @param   \Illuminate\Contracts\Foundation\Application    $app
      */
-    public function __construct(DataObject $context, Type\Repository $repository)
+    public function __construct($context, Type\Repository $repository, App $app)
     {
-        $this->context = $context;
+        $this->app = $app;
+        $this->context = $app->make(Data::class, [$context]);
         $this->typeRepository = $repository;
+    }
+
+
+    /**
+     * Returns the Laravel-App.
+     *
+     * @return  \Illuminate\Contracts\Foundation\Application
+     */
+    public function getApp()
+    {
+        return $this->app;
+    }
+
+
+    /**
+     * Return the data object for this object
+     *
+     * @return  \Lilie\Pool\Data;
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+
+    /**
+     * Return a lilie type repository.
+     *
+     * @return  \Lilie\Type\Repository
+     */
+    public function getTypeRepository()
+    {
+        return $this->typeRepository;
     }
 
 
@@ -55,17 +98,6 @@ class Pool {
     public function equals(Pool $pool)
     {
         return spl_object_hash($pool) === spl_object_hash($this);
-    }
-
-
-    /**
-     * Return a lilie type repository.
-     *
-     * @return  Type\Repository
-     */
-    public function getTypeRepository()
-    {
-        return $this->typeRepository;
     }
 
 

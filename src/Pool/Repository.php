@@ -82,9 +82,7 @@ class Repository {
      */
     protected function mapObject($name)
     {
-        return $this->app->make(PoolObject::class, [
-            $this->app->make(Data::class, [$this->config->get($name)])
-        ]);
+        return $this->app->make(PoolObject::class, [$this->config->get($name)]);
     }
 
 

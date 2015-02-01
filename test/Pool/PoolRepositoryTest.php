@@ -24,13 +24,11 @@ class PoolRepositoryTest extends PHPUnit_Framework_TestCase {
         $poolName = 'test';
         $object = $this->getRepository();
         $poolMock = Mockery::mock(Pool\Pool::class);
-        $dataMock = Mockery::mock(Pool\Data::class);
 
         $object->getConfig()->shouldReceive('has')->with($poolName)->AndReturn(true);
         $object->getConfig()->shouldReceive('has')->with('unknown')->AndReturn(false);
         $object->getConfig()->shouldReceive('get')->with($poolName)->andReturn([]);
-        $object->getApp()->shouldReceive('make')->withArgs([Pool\Data::class, [[]]])->AndReturn($dataMock);
-        $object->getApp()->shouldReceive('make')->withArgs([Pool\Pool::class, [$dataMock]])->andReturn($poolMock);
+        $object->getApp()->shouldReceive('make')->withArgs([Pool\Pool::class, [[]]])->andReturn($poolMock);
 
         $this->assertNull($object->get('unknown'));
         $this->assertInstanceOf(get_class($poolMock), $object->get($poolName));
@@ -42,13 +40,11 @@ class PoolRepositoryTest extends PHPUnit_Framework_TestCase {
         $poolName = 'test';
         $object = $this->getRepository();
         $poolMock = Mockery::mock(Pool\Pool::class);
-        $dataMock = Mockery::mock(Pool\Data::class);
 
         $object->getConfig()->shouldReceive('has')->with($poolName)->AndReturn(true);
-        $object->getConfig()->shouldReceive('has')->with('unknown')->AndReturn(false);
         $object->getConfig()->shouldReceive('get')->with($poolName)->andReturn([]);
-        $object->getApp()->shouldReceive('make')->withArgs([Pool\Data::class, [[]]])->AndReturn($dataMock);
-        $object->getApp()->shouldReceive('make')->withArgs([Pool\Pool::class, [$dataMock]])->andReturn($poolMock);
+        $object->getConfig()->shouldReceive('has')->with('unknown')->AndReturn(false);
+        $object->getApp()->shouldReceive('make')->withArgs([Pool\Pool::class, [[]]])->andReturn($poolMock);
 
         $this->assertTrue($object->exists($poolName));
         $this->assertFalse($object->exists('unknown'));

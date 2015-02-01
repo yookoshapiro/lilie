@@ -4,32 +4,43 @@ use Lilie\Pool;
 
 class PoolPoolTest extends PHPUnit_Framework_TestCase {
 
-    public function getPool($dataMock = null)
+    public function getPool($data = array())
     {
-        if(is_null($dataMock))
-        {
-            $dataMock = Mockery::mock(Pool\Data::class);
-        }
+        $repMock = Mockery::mock('\Lilie\Type\Repository');
+        $appMock = Mockery::mock('\Illuminate\Contracts\Foundation\Application');
+        $appMock->shouldReceive('make')->withAnyArgs()->andReturn($dataMock = Mockery::mock('\Lilie\Pool\Data'));
 
-        return new Pool\Pool($dataMock, Mockery::mock(\Lilie\Type\Repository::class));
+        return new Pool\Pool($data, $repMock, $appMock);
     }
 
 
     public function testGetDataFromContext()
     {
-        $pool = $this->getPool(new Pool\Data(['lib' => 'test']));
+        $data = ['test' => 'Steven'];
+        $pool = $this->getPool();
+
+        $pool->getContext()->shouldReceive('offsetExists')->withAnyArgs()->andReturnUsing(function($value) use ($data)
+        {
+            return ! is_null(array_get($data, $value));
+        });
+
+        $pool->getContext()->shouldReceive('offsetGet')->withAnyArgs()->andReturnUsing(function($value) use ($data)
+        {
+            return array_get($data, $value);
+        });
 
         $this->assertNull($pool->fail);
-        $this->assertEquals('test', $pool->lib);
+        $this->assertEquals('Steven', $pool->test);
     }
 
 
     public function testEquals()
     {
         $pool = $this->getPool();
+        $failMock = $this->getPool();
 
         $this->assertTrue($pool->equals($pool));
-        $this->assertFalse($pool->equals(Mockery::mock(Pool\Pool::class)));
+        $this->assertFalse($pool->equals($failMock));
     }
 
 }
