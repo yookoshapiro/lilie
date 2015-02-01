@@ -1,6 +1,5 @@
 <?php namespace Lilie;
 
-use App;
 use File as AppFile;
 use Config as AppConfig;
 use Illuminate\Support\ServiceProvider;
@@ -29,9 +28,9 @@ class LilieServiceProvider extends ServiceProvider {
          | Config
          |-----------------------------------------------------------------------------
          */
-        $this->app->singleton( Config\Repository::class, function()
+        $this->app->singleton( Config\Repository::class, function($app)
         {
-            return App::build(Config\Repository::class, [lilie_path(AppConfig::get('packages.lilie.puddle'))]);
+            return $app->build(Config\Repository::class, [lilie_path(AppConfig::get('packages.lilie.puddle'))]);
         });
 
 
@@ -40,19 +39,30 @@ class LilieServiceProvider extends ServiceProvider {
          | Pool
          |-----------------------------------------------------------------------------
          */
-        $this->app->singleton( Pool\Repository::class, function()
+        $this->app->singleton( Pool\Repository::class, function($app)
         {
-            return App::build(Pool\Repository::class);
+            return $app->build(Pool\Repository::class);
         });
 
-        $this->app->bind( Pool\Pool::class, function()
+        $this->app->bind( Pool\Pool::class, function($app, $args)
         {
-            return App::build(Pool\Pool::class);
+            return $app->build(Pool\Pool::class, $args);
         });
 
-        $this->app->bind( Pool\Data::class, function()
+        $this->app->bind( Pool\Data::class, function($app, $args)
         {
-            return App::build(Pool\Data::class);
+            return $app->build(Pool\Data::class, $args);
+        });
+
+
+        /*
+         |-----------------------------------------------------------------------------
+         | Type
+         |-----------------------------------------------------------------------------
+         */
+        $this->app->singleton( Type\Repository::class, function($app)
+        {
+            return $app->build(Type\Repository::class);
         });
     }
 
