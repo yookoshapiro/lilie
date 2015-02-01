@@ -4,6 +4,12 @@ use Lilie\Pool;
 
 class PoolPoolTest extends PHPUnit_Framework_TestCase {
 
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+
+
     public function getPool($data = array())
     {
         $repMock = Mockery::mock('\Lilie\Type\Repository');

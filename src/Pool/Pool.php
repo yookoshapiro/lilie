@@ -109,50 +109,7 @@ class Pool {
      */
     public function getType($name)
     {
-        return $this->getTypeRespository()->get($name);
+        return $this->getTypeRespository()->get($this, $name);
     }
-
-
-
-
-
-    /**
-     * Erstellt ein Object
-     *
-     * @param   string  $name
-     * @param   mixed   $params
-     * @return  mixed
-     *
-    protected function mapObject($name, $params)
-    {
-        if( isset($this->classes[$name]) )
-        {
-            return App::build( $this->classes[$name], $params );
-        }
-
-        return null;
-    }
-
-
-    /**
-     * Erzeugt ein Objekt das zum Verarbeiten des übergebenen Pfades genutzt werden kann
-     *
-     * @param   string  $path
-     * @return  \Lilie\Bundle\File
-     *
-    public function file($path)
-    {
-        return $this->mapObject('file', [$path, $this]);
-    }
-
-
-    /**
-     *
-     *
-     *
-    public function dir($path)
-    {
-        return $this->mapObject('dir', [$path, $this]);
-    }*/
 
 }

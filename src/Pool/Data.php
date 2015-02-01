@@ -7,32 +7,35 @@ class Data extends DataObject {
     protected $data = [
 
         /**
-         * Name des Ordners im Paket indem weitere Klasse liegen
+         * The class library in this pool.
          *
          * @var string
          **/
         'lib' => null,
 
+
         /**
-         * Name des Ordners im Paket indem die Seitentypen liegen
+         * Folder with all page types of this pool.
          *
          * @var	string
          **/
         'types' => null,
 
+
         /**
-         * Dateien die beim initieren des Pakets geladen werden
+         * Start up files.
          *
          * @var	array
          **/
         'files' => array(),
 
+
         /**
-         * Erlaubt ein Paket das auf keinen der definierten Pakete beruht (optional)
+         * A array for some more pool specific settings.
          *
          * @var	array
          **/
-        'client' => array()
+        'extras' => array()
 
     ];
 

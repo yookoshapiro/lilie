@@ -15,7 +15,7 @@ class Repository {
 
 
     /**
-     * Einstellungen aller Pools
+     * Configuration of all pools.
      *
      * @var	    \Lilie\Config\Repository
      **/
@@ -23,7 +23,7 @@ class Repository {
 
 
     /**
-     * Erzeugte Objekte die ein Pool darstellen
+     * Cache for builded pool objects.
      *
      * @var	    array
      **/
@@ -31,7 +31,7 @@ class Repository {
 
 
     /**
-     * Das Bundle, das als Grundlage für alle anderen dient
+     * The default pool.
      *
      * @var	    \Lilie\Pool\Bundle
      **/
@@ -74,7 +74,7 @@ class Repository {
 
 
     /**
-     * Erstellt ein Object
+     * Build a new object.
      *
      * @param   string  $name
      * @param   mixed   $params
@@ -87,7 +87,7 @@ class Repository {
 
 
     /**
-     * Gibt eine Bundle-Klasse wieder
+     * Return a pool-object.
      *
      * @param	string	$name
      * @return	\Lilie\Pool\Pool|null
@@ -109,7 +109,7 @@ class Repository {
 
 
     /**
-     * Setzen des default-Bundles
+     * Set the default pool.
      *
      * @param   \Lilie\Pool\Pool   $default
      * @return  void
@@ -121,7 +121,7 @@ class Repository {
 
 
     /**
-     * Gibt das default-Bundle zurück
+     * Return the default pool.
      *
      * @return  \Lilie\Pool\Pool
      */
@@ -132,7 +132,7 @@ class Repository {
 
 
     /**
-     * Gibt zurück, ob ein Bundle mit dem übergebenen Namen exisitiert
+     * Check if the given pool name exists.
      *
      * @param	string	$name
      * @return	bool
