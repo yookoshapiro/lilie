@@ -1,6 +1,8 @@
 <?php namespace Lilie\Pool;
 
+use Config as AppConfig;
 use Lilie\Pool\Pool as PoolObject;
+use Illuminate\Support\Facades\File;
 use Lilie\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application as App;
 
@@ -74,7 +76,7 @@ class Repository {
 
 
     /**
-     * Build a new object.
+     * Build a new pool object.
      *
      * @param   string  $name
      * @param   mixed   $params
@@ -82,7 +84,23 @@ class Repository {
      */
     protected function mapObject($name)
     {
-        return $this->app->make(PoolObject::class, [$this->config->get($name)]);
+        $puddle = AppConfig::get('packages.lilie.puddle');
+
+        $data = array_map(function($item) use ($puddle, $name)
+        {
+            if(is_array($item))
+            {
+                return $item;
+            }
+
+            $path = lilie_path(
+                implode(DIRECTORY_SEPARATOR, [$puddle, $name, $item])
+            );
+
+            return File::isDirectory($path) ? $path : $item;
+        }, $this->config->get($name));
+
+        return $this->app->make(PoolObject::class, [$data]);
     }
 
 

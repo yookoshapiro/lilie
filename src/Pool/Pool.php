@@ -1,6 +1,7 @@
 <?php namespace Lilie\Pool;
 
 use Lilie\Type;
+use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Foundation\Application as App;
 
 class Pool {
@@ -16,7 +17,7 @@ class Pool {
     /**
      * The data for this class.
      *
-     * @var	    \Lilie\DataObject
+     * @var	    \Lilie\Pool\Data
      **/
     private $context;
 
@@ -39,13 +40,13 @@ class Pool {
     public function __construct($context, Type\Repository $repository, App $app)
     {
         $this->app = $app;
-        $this->context = $app->make(Data::class, [$context]);
         $this->typeRepository = $repository;
+        $this->context = $app->make(Data::class, [$context]);
     }
 
 
     /**
-     * Returns the Laravel-App.
+     * Return the Laravel-App.
      *
      * @return  \Illuminate\Contracts\Foundation\Application
      */
@@ -56,7 +57,7 @@ class Pool {
 
 
     /**
-     * Return the data object for this object
+     * Return the context for this object.
      *
      * @return  \Lilie\Pool\Data;
      */
@@ -109,7 +110,19 @@ class Pool {
      */
     public function getType($name)
     {
-        return $this->getTypeRespository()->get($this, $name);
+        return $this->getTypeRepository()->get($this, $name);
+    }
+
+
+    /**
+     * Check if the given name exists as dir in the type folder of this pool.
+     *
+     * @param   string  $name
+     * @return  bool
+     */
+    public function hasType($name)
+    {
+        return File::isDirectory( $this->context->types .DIRECTORY_SEPARATOR. $name );
     }
 
 }

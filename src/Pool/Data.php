@@ -15,6 +15,14 @@ class Data extends DataObject {
 
 
         /**
+         * Namespace of a library.
+         *
+         * @var	array
+         **/
+        'namespace' => null,
+
+
+        /**
          * Folder with all page types of this pool.
          *
          * @var	string
