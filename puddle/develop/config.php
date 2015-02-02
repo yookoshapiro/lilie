@@ -21,7 +21,7 @@ return [
     | verschiedenen Pakete von einander zu unterscheiden.
     */
 
-    'namespace' => 'Default',
+    'namespace' => 'Develop',
 
 
     /*------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
 
     'files' => [
 
-        'index.php'
+        //
 
     ]
 
