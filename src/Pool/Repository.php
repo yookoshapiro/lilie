@@ -1,6 +1,7 @@
 <?php namespace Lilie\Pool;
 
 use Config as AppConfig;
+use Illuminate\Support\Collection;
 use Lilie\Pool\Pool as PoolObject;
 use Illuminate\Support\Facades\File;
 use Lilie\Config\Repository as Config;
@@ -27,9 +28,9 @@ class Repository {
     /**
      * Cache for builded pool objects.
      *
-     * @var	    array
+     * @var	    \Illuminate\Support\Collection
      **/
-    protected $pools = array();
+    protected $pools;
 
 
     /**
@@ -50,6 +51,7 @@ class Repository {
     {
         $this->app = $app;
         $this->config = $config;
+        $this->pools = new Collection();
     }
 
 

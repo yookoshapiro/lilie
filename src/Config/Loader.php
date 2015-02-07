@@ -2,6 +2,7 @@
 
 use Cache as AppCache;
 use Config as AppConfig;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 
 class Loader {
@@ -9,9 +10,18 @@ class Loader {
     /**
      * The config data as an array
      *
-     * @var     array
+     * @var     \Illuminate\Support\Collection
      */
-    private $data = array();
+    private $data;
+
+
+    /**
+     * Build the ConfigLoader
+     */
+    public function __construct()
+    {
+        $this->data = new Collection();
+    }
 
 
     /**

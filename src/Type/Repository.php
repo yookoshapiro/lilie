@@ -2,6 +2,7 @@
 
 use Lilie\Pool;
 use Lilie\Type;
+use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Foundation\Application as App;
 
@@ -34,9 +35,9 @@ class Repository {
     /**
      * Store all loaded type objects.
      *
-     * @var     array
+     * @var     \Illuminate\Support\Collection
      */
-    protected $cache = array();
+    protected $cache;
 
 
     /**
@@ -50,6 +51,7 @@ class Repository {
     {
         $this->app = $app;
         $this->files = $files;
+        $this->cache = new Collection();
         $this->poolRepository = $poolRepo;
     }
 
