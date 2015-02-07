@@ -17,7 +17,7 @@ abstract class DataObject implements \ArrayAccess {
      *
      * @param    array 		$data
      */
-    final public function __construct(array $data = array())
+    public function __construct(array $data = array())
     {
         foreach($data as $key => $item)
         {
