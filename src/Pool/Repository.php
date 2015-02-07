@@ -86,7 +86,7 @@ class Repository {
      */
     protected function mapObject($name)
     {
-        $puddle = AppConfig::get('packages.lilie.puddle');
+        $puddle = AppConfig::get('lilie.puddle');
 
         $data = array_map(function($item) use ($puddle, $name)
         {
