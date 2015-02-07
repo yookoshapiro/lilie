@@ -33,16 +33,18 @@ class Loader {
      */
     public function loadConfig($path)
     {
-        if (AppCache::has($path) && ! AppConfig::get('app.debug'))
+        $key = md5($path);
+
+        if (AppCache::has($key) && ! AppConfig::get('app.debug'))
         {
-            $this->data = $this->loadConfigFromCache($path);
+            $this->data = $this->loadConfigFromCache($key);
 
             return;
         }
 
         $this->data = $this->loadConfigFromFiles($path);
 
-        AppCache::forever($path, $this->data);
+        AppCache::forever($key, $this->data);
     }
 
 
