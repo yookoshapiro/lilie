@@ -10,7 +10,7 @@ if( ! function_exists('lilie_path'))
      */
     function lilie_path($path = '')
     {
-        return Config::get('packages.lilie.path') . ($path ?  DIRECTORY_SEPARATOR . $path : $path);
+        return Config::get('lilie.path') . ($path ?  DIRECTORY_SEPARATOR . $path : $path);
     }
 }
 
