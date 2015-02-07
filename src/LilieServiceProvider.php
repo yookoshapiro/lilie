@@ -28,6 +28,7 @@ class LilieServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+
         /*
          |-----------------------------------------------------------------------------
          | Lilie' startup
@@ -36,7 +37,6 @@ class LilieServiceProvider extends ServiceProvider {
         $this->loadFile([
             AppConfig::get('lilie.path') . '/src/Support/helpers.php'
         ]);
-
 
         /*
          |-----------------------------------------------------------------------------

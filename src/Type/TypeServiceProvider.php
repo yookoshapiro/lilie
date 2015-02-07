@@ -1,5 +1,6 @@
 <?php namespace Lilie\Type;
 
+use Config as AppConfig;
 use Illuminate\Support\ServiceProvider;
 
 class TypeServiceProvider extends ServiceProvider {
