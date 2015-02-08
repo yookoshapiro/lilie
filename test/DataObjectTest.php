@@ -19,7 +19,7 @@ class DataObjectTest extends \PHPUnit_Framework_TestCase {
 
     public function testIfConstructorOnlySetExistsValues()
     {
-        $data = $this->getDataObject(['test' => 1,'fail' => 2])->getData();
+        $data = $this->getDataObject(['test' => 1,'fail' => 2])->toArray();
 
         $this->assertEquals(1, $data['test']);
         $this->assertArrayNotHasKey('fail', $data);

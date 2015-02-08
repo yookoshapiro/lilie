@@ -34,7 +34,7 @@ abstract class DataObject implements \ArrayAccess {
      *
      * @return  array
      */
-    public function getData()
+    public function toArray()
     {
         return $this->data;
     }
