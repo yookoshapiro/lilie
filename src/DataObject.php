@@ -50,6 +50,18 @@ abstract class DataObject implements \ArrayAccess {
 
 
     /**
+     * Return if a given data field is writable.
+     *
+     * @param   string      $name
+     * @return  bool
+     */
+    public function isWriteable($name)
+    {
+        return array_key_exists($name, $this->data) && ! $this->isGuarded($name);
+    }
+
+
+    /**
      * Returns all data of this object.
      *
      * @return  array
@@ -105,7 +117,7 @@ abstract class DataObject implements \ArrayAccess {
      **/
     public function __set($key, $value)
     {
-        if( array_key_exists($key, $this->data) && ! $this->isGuarded($key) )
+        if( $this->isWriteable($key) )
         {
             $this->data[$key] = $value;
         }
@@ -120,7 +132,7 @@ abstract class DataObject implements \ArrayAccess {
      */
     public function offsetSet($offset, $value)
     {
-        if( array_key_exists($offset, $this->data) && ! $this->isGuarded($offset) )
+        if( $this->isWriteable($offset) )
         {
             $this->data[$offset] = $value;
         }
