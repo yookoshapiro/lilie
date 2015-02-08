@@ -13,6 +13,14 @@ abstract class DataObject implements \ArrayAccess {
 
 
     /**
+     * The attributes that can't be changed.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+
+    /**
      * Constructor allows setup the object with values.
      *
      * @param    array 		$data
@@ -26,6 +34,18 @@ abstract class DataObject implements \ArrayAccess {
                 $this->data[$key] = $item;
             }
         }
+    }
+
+
+    /**
+     * Return if the given data field is guarded.
+     *
+     * @param   string      $name
+     * @return  bool
+     */
+    protected function isGuarded($name)
+    {
+        return array_search($name, $this->guarded) !== false;
     }
 
 
@@ -85,7 +105,7 @@ abstract class DataObject implements \ArrayAccess {
      **/
     public function __set($key, $value)
     {
-        if( array_key_exists($key, $this->data) )
+        if( array_key_exists($key, $this->data) && ! $this->isGuarded($key) )
         {
             $this->data[$key] = $value;
         }
@@ -100,7 +120,7 @@ abstract class DataObject implements \ArrayAccess {
      */
     public function offsetSet($offset, $value)
     {
-        if( array_key_exists($offset, $this->data) )
+        if( array_key_exists($offset, $this->data) && ! $this->isGuarded($offset) )
         {
             $this->data[$offset] = $value;
         }
