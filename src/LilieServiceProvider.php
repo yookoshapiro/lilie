@@ -29,21 +29,14 @@ class LilieServiceProvider extends ServiceProvider {
     public function register()
     {
 
-        /*
-         |-----------------------------------------------------------------------------
-         | Lilie' startup
-         |-----------------------------------------------------------------------------
-         */
+        // Lilie's startup file
         $this->loadFile([
             AppConfig::get('lilie.path') . '/src/Support/helpers.php'
         ]);
 
-        /*
-         |-----------------------------------------------------------------------------
-         | Config
-         |-----------------------------------------------------------------------------
-         */
-        $this->app->singleton( Config\Repository::class, function($app)
+
+        // Config class
+        $this->app->singleton(Config\Repository::class, function($app)
         {
             return $app->build(Config\Repository::class, [lilie_path(AppConfig::get('lilie.puddle'))]);
         });

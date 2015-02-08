@@ -12,10 +12,7 @@
     "autoload": {
         "psr-4": {
             "Lilie": "src/"
-        },
-        "files": [
-            "src/Lilie/start.php"
-        ]
+        }
     },
     "minimum-stability": "dev"
 }
