@@ -2,8 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class ClientServiceProvider extends ServiceProvider
-{
+class ClientServiceProvider extends ServiceProvider {
 
     /**
      * Register the service provider.

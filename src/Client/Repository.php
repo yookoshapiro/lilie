@@ -68,7 +68,7 @@ class Repository
      * @param   \Lilie\Eloquent\Client
      * @return  \Lilie\Client\Client
      */
-    protected function mapObject($table)
+    protected function mapObject(Table $table)
     {
         return $this->app->make(Client::class, [$table, $this->poolRepository->get($table->pool)]);
     }
