@@ -7,7 +7,7 @@ class Data extends DataObject {
     protected $data = [
 
         /**
-         * Der Name dieses Seitentypes
+         * Name of this page type.
          *
          * @var	string
          **/
@@ -15,7 +15,7 @@ class Data extends DataObject {
 
 
         /**
-         * Die Dateien zu diesem Seitentyp
+         * Files to this page type.
          *
          * @var	array
          **/

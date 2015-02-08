@@ -67,4 +67,16 @@ class Type {
         return array_get( $this->context, $key );
     }
 
+
+    /**
+     * Return the name of this page type.
+     *
+     * @return  mixed
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+
 }
