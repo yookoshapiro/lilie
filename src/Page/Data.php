@@ -1,9 +1,22 @@
 <?php namespace Lilie\Page;
 
-use Lilie\DataObject;
+use Lilie\Support\Collection;
 
-class Data extends DataObject {
+class Data extends Collection {
 
+    /**
+     * The attributes that can't be changed.
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+
+    /**
+     * Store the data for this Object.
+     *
+     * @var     array
+     */
     protected $data = [
 
         /**

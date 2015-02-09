@@ -1,8 +1,8 @@
 <?php namespace Lilie\Type;
 
-use Lilie\DataObject;
+use Lilie\Support\Collection;
 
-class Data extends DataObject {
+class Data extends Collection {
 
     protected $data = [
 
