@@ -16,7 +16,7 @@ class Collection implements ArrayAccess, Arrayable {
     /**
      * The attributes that can't be changed.
      *
-     * @var array
+     * @var     array
      */
     protected $guarded = [];
 
@@ -68,22 +68,18 @@ class Collection implements ArrayAccess, Arrayable {
      */
     public function isWriteable($name)
     {
-        return $this->isReadable($name) && !$this->isGuarded($name);
+        return $this->isReadable($name) && ! $this->isGuarded($name);
     }
 
 
     /**
-     * Get the collection of items as a plain array.
+     * Get the collection of data as a plain array.
      *
-     * @return array
+     * @return  array
      */
     public function toArray()
     {
-        return array_map(function($value)
-        {
-            return $value instanceof Arrayable ? $value->toArray() : $value;
-
-        }, $this->data);
+        return collect($this->data)->toArray();
     }
 
 
@@ -107,9 +103,9 @@ class Collection implements ArrayAccess, Arrayable {
     /**
      * Returns the value at the specified index.
      *
-     * @param    mixed $offset
-     * @return    mixed|null
-     * @throw   ErrorException
+     * @param   mixed $offset
+     * @return  mixed|null
+     * @throws  ErrorException
      */
     public function offsetGet($offset)
     {
@@ -124,9 +120,9 @@ class Collection implements ArrayAccess, Arrayable {
     /**
      * Set value by a given key, if the key exists.
      *
-     * @param    string $key
-     * @param    string $value
-     * @return    void
+     * @param   string $key
+     * @param   string $value
+     * @return  void
      **/
     public function __set($key, $value)
     {
@@ -139,8 +135,8 @@ class Collection implements ArrayAccess, Arrayable {
     /**
      * Sets the value at the specified index to newval.
      *
-     * @param    string $offset
-     * @param    mixed  $value
+     * @param   string $offset
+     * @param   mixed  $value
      */
     public function offsetSet($offset, $value)
     {
