@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Facade;
 class Config extends Facade {
 
     /**
-     * Register the Pool-Repository.
+     * Register the config repository.
      *
      * @return string
      */

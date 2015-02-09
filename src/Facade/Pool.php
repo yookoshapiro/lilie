@@ -6,7 +6,7 @@ class Pool extends Facade {
 
 
     /**
-     * Register the Pool-Repository.
+     * Register the pool repository.
      *
      * @return string
      */

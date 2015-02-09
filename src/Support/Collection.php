@@ -161,6 +161,7 @@ class Collection implements ArrayAccess, Arrayable {
         return $this->isReadable($key);
     }
 
+
     /**
      * Returns whether the requested index exists.
      *
