@@ -1,9 +1,9 @@
 <?php namespace Lilie\Support;
 
+use ArrayAccess;
 use Illuminate\Contracts\Support\Arrayable;
 
-class Collection implements \ArrayAccess, Arrayable
-{
+class Collection implements ArrayAccess, Arrayable {
 
     /**
      * Store the data for this Object, must be filled by child class.
@@ -73,13 +73,17 @@ class Collection implements \ArrayAccess, Arrayable
 
 
     /**
-     * Get the instance as an array.
+     * Get the collection of items as a plain array.
      *
      * @return array
      */
     public function toArray()
     {
-        return $this->data;
+        return array_map(function($value)
+        {
+            return $value instanceof Arrayable ? $value->toArray() : $value;
+
+        }, $this->data);
     }
 
 
