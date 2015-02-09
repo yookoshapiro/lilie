@@ -1,13 +1,14 @@
 <?php namespace Lilie\Client;
 
+use Closure;
 use Lilie\Pool\Pool;
 use Lilie\Page\Page;
-use Lilie\Eloquent\Page as PageTable;
-use Lilie\Eloquent\Client as ClientTable;
+use Illuminate\Support\Collection;
+use Lilie\Eloquent\Page as EloquentPage;
+use Lilie\Eloquent\Client as EloquentClient;
 use Illuminate\Contracts\Foundation\Application as App;
 
-class Client
-{
+class Client {
 
     /**
      * Laravel's application
@@ -34,14 +35,23 @@ class Client
 
 
     /**
+     * Cache for page objects.
+     *
+     * @var     \Illuminate\Support\Collection
+     */
+    private $cache;
+
+
+    /**
      * Build a client object.
      *
      * @param   \Lilie\Eloquent\Client  $res
      */
-    public function __construct(ClientTable $table, Pool $pool, App $app)
+    public function __construct(EloquentClient $table, Pool $pool, App $app)
     {
         $this->app = $app;
         $this->table = $table;
+        $this->cache = new Collection;
         $this->context = $app->make(Data::class, [$table->toArray()]);
 
         $this->context['pool'] = $pool;
@@ -87,22 +97,42 @@ class Client
      * @param   \Lilie\Eloquent\Page
      * @return  \Lilie\Page\Page
      */
-    protected function mapObject(PageTable $table)
+    protected function mapObject(EloquentPage $table)
     {
-        $table->type = $this->getPool()->getType($table->type);
+        if ($this->cache->has($table->id)) {
+            return $this->cache->get($table->id);
+        }
 
-        return $this->app->make(Page::class, [$table]);
+        $data = $table->toArray();
+        $data['type'] = $this->getPool()->getType($table->type);
+
+        $res = $this->app->make(Page::class, [
+            $data, $this->table->pages()->getQuery()
+        ]);
+
+        $this->cache->put($table->id, $res);
+
+        return $res;
     }
 
 
     /**
-     * Return the root page of this object.
+     * Return a collection with all pages assign to this client.
      *
-     * @return  \Lilie\Page\Page
+     * @param   \Closure     $callback
+     * @return  \Illuminate\Support\Collection
      */
-    public function getRoot()
+    public function getPages(Closure $callback = null)
     {
-        return $this->mapObject( $this->table->pages()->find($this->context->root) );
+        $res = $this->table->pages()->getQuery();
+
+        if ( ! is_null($callback)) {
+            $callback($res);
+        }
+
+        return $res->get()->transform(function($item) {
+            return $this->mapObject($item);
+        });
     }
 
 
@@ -114,7 +144,20 @@ class Client
      */
     public function getPage($id)
     {
-        return $this->table->pages()->find($id);
+        return $this->getPages(function($query) use ($id) {
+            $query->where('id', '=', $id);
+        })->first();
+    }
+
+
+    /**
+     * Return the root page of this object.
+     *
+     * @return  \Lilie\Page\Page
+     */
+    public function getRoot()
+    {
+        return $this->getPage($this->context->root);
     }
 
 
