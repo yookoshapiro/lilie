@@ -2,9 +2,10 @@
 
 use Lilie\Type;
 use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Foundation\Application as App;
 
-class Pool {
+class Pool implements Arrayable {
 
     /**
      * Laravel's application
@@ -123,6 +124,17 @@ class Pool {
     public function hasType($name)
     {
         return File::isDirectory( $this->context->types .DIRECTORY_SEPARATOR. $name );
+    }
+
+
+    /**
+     * Get the context as a plain array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->context->toArray();
     }
 
 }
