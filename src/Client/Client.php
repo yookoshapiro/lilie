@@ -160,5 +160,4 @@ class Client {
         return $this->getPage($this->context->root);
     }
 
-
 }
