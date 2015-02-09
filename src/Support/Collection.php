@@ -30,7 +30,7 @@ class Collection implements ArrayAccess, Arrayable {
     {
         foreach ($data as $key => $item) {
             if ($this->isReadable($key)) {
-                $this->offsetSet($key, $item);
+                array_set($this->data, $key, $item);
             }
         }
     }
